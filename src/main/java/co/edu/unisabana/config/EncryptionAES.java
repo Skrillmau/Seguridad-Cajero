@@ -7,9 +7,12 @@ import java.util.Arrays;
 import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
- 
+ /**
+  * Modela el cifrador AES
+  * @author mate_
+  *
+  */
 public class EncryptionAES {
- 
     private static SecretKeySpec secretKey;
     private static byte[] key;
 /**

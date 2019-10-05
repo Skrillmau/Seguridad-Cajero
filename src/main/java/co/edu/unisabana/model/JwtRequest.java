@@ -1,7 +1,11 @@
 package co.edu.unisabana.model;
 
 import java.io.Serializable;
-
+/**
+ * Modela el request del JSON Web Token
+ * @author mate_
+ *
+ */
 public class JwtRequest implements Serializable {
 
 	private static final long serialVersionUID = 5926468583005150707L;

@@ -13,7 +13,11 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-
+/**
+ * Modela utilidades del token
+ * @author mate_
+ *
+ */
 @Component
 public class JwtTokenUtil implements Serializable {
 
@@ -27,15 +31,15 @@ public class JwtTokenUtil implements Serializable {
 	/**
 	 * Obtiene el username
 	 * @param token token valido para acceder a el servidor
-	 * @return UserName from token
+	 * @return UserName del token
 	 */
 	public String getUsernameFromToken(String token) {
 		return getClaimFromToken(token, Claims::getSubject);
 	}
 	/**
 	 * Retorna la fecha de expiracion del token
-	 * @param token
-	 * @return Date of expiration
+	 * @param token token
+	 * @return Date de expiracion
 	 */
 
 	public Date getExpirationDateFromToken(String token) {
@@ -44,7 +48,7 @@ public class JwtTokenUtil implements Serializable {
 	/**
 	 * Retorna la fecha de creacion del token
 	 * @param token
-	 * @return Date of expiration
+	 * @return Date de creacion
 	 */
 	public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
 		final Claims claims = getAllClaimsFromToken(token);

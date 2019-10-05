@@ -22,29 +22,22 @@ public class DAOUser {
 	private String password;
 /**
  * Retorna el nombre de usuario 
- * @return username
+ * @return username nombre de usuario
  */
 	public String getUsername() {
 		return username;
 	}
-/**
- * Setea el username del cliente
- * @param username
- */
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
 /**
  * Retorna el password del cliente
- * @return
  */
 	public String getPassword() {
 		return password;
 	}
-/**
- * Setea el password del lciente
- * @param password
- */
+
 	public void setPassword(String password) {
 		this.password = password;
 	}

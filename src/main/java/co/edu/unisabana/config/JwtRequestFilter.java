@@ -38,8 +38,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	 * @param request opbtiene la peticion para verificar si es valido el token
 	 * @param response obtiene el request response
 	 * @param chain peticion para poner en cola a el filtro
-	 * @throws ServletException Handles the errors generated in the servlet
-	 * @throws IOException Handles the input output reads
+	 * @throws ServletException excepcion generada en el servlet
+	 * @throws IOException input outpur error 
 	 */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)

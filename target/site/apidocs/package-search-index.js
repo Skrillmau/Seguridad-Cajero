@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"co.edu.unisabana"},{"l":"co.edu.unisabana.config"},{"l":"co.edu.unisabana.controller"},{"l":"co.edu.unisabana.dao"},{"l":"co.edu.unisabana.model"},{"l":"co.edu.unisabana.service"}]

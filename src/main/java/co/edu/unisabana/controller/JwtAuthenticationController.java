@@ -18,7 +18,11 @@ import co.edu.unisabana.model.JwtRequest;
 import co.edu.unisabana.model.JwtResponse;
 import co.edu.unisabana.model.UserDTO;
 import co.edu.unisabana.service.JwtUserDetailsService;
-
+/**
+ * Endpoint de autenticacion y registro (No requiere autenticacion)
+ * @author mate_
+ *
+ */
 
 @RestController
 @CrossOrigin
@@ -32,7 +36,12 @@ public class JwtAuthenticationController {
 
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
-	
+	/**
+	 * Crea el token de autenticacion despues de pasar por las validaciones
+	 * @param authenticationRequest
+	 * @return Token para incluir en el header
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
@@ -45,7 +54,11 @@ public class JwtAuthenticationController {
 
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
-	
+	/**
+	 * Registra un usuario en la base de datos
+	 * @param user
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
 		return ResponseEntity.ok(userDetailsService.save(user));

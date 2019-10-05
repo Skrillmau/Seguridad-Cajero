@@ -1,5 +1,9 @@
 package co.edu.unisabana.model;
-
+/**
+ * Modela el usuario
+ * @author mate_
+ *
+ */
 public class UserDTO {
 	private String username;
 	private String password;

@@ -22,7 +22,11 @@ import java.security.spec.RSAPublicKeySpec;
 import java.util.Base64;
 
 import javax.crypto.Cipher;
-
+/**
+ * Modela el cifrador de RSA
+ * @author mate_
+ *
+ */
 public class EncryptionRSA {	
 	/*public static void main(String[] args) throws Exception {
 		this.RsaUtil(plainText);
@@ -37,11 +41,11 @@ public class EncryptionRSA {
 
 	}*/
 	/**
-	 * 
-	 * @param plainText
-	 * @throws NoSuchAlgorithmException
-	 * @throws InvalidKeySpecException
-	 * @throws IOException
+	 * Clase que modela el cifrado con RSA
+	 * @param plainText texto plano a encriptar 
+	 * @throws NoSuchAlgorithmException excepcion al ejecutar el codigo
+	 * @throws InvalidKeySpecException retorna excepcion si la key es invalida
+	 * @throws IOException Error 
 	 */
 	public EncryptionRSA(String plainText) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
 		// Get an instance of the RSA key generator
@@ -71,7 +75,7 @@ public class EncryptionRSA {
  * @param fileName nombre del archivo que donde se va a guardar la key
  * @param n modulo a el cual se le va a aplicar la funcion de RSA
  * @param potencia Potencia a la cual se elevara y posteriormente aplicar el modulo
- * @throws IOException
+ * @throws IOException Error
  */
 	public static void saveKeyToFile(String fileName, BigInteger n, BigInteger potencia) throws IOException {
 		ObjectOutputStream ObjOutputStream = new ObjectOutputStream(
@@ -89,7 +93,7 @@ public class EncryptionRSA {
  * Lee el archivo de keystore para recuperar la key (publica o privada)
  * @param keyFileName nombre del archivo de la key
  * @return key retorna la key obtenida de el archivo keystore
- * @throws IOException
+ * @throws IOException Error
  */
 	public static Key readKeyFromFile(String keyFileName) throws IOException {
 		Key key = null;
@@ -116,7 +120,7 @@ public class EncryptionRSA {
  * @param txt Texto plano a cifrar
  * @param fileKey nombre del archivo de la key formato keystore
  * @return cipherText texto cifrado usando RSA
- * @throws Exception
+ * @throws Exception Error
  */
 	public static byte[] encrypt(String txt, String fileKey) throws Exception {
 		Key publicKey = readKeyFromFile("public.key");
@@ -136,8 +140,8 @@ public class EncryptionRSA {
  * Descifrado usando RSA modo cifrador de bloques ECB
  * @param cipheredTxt Texto a decifrar con RSA
  * @param fileKey nombre del archivo que contiene la key formato keystore
- * @return decryptedTextArray Texto decifrado usando RSA con modo ECB 
- * @throws Exception
+ * @return decryptedText Array Texto decifrado usando RSA con modo ECB 
+ * @throws Exception Error
  */
 	public static String decrypt(byte[] cipheredTxt, String fileKey) throws Exception {
 		Key privateKey = readKeyFromFile("private.key");
