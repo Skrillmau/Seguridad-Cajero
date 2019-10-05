@@ -56,8 +56,8 @@ public class JwtAuthenticationController {
 	}
 	/**
 	 * Registra un usuario en la base de datos
-	 * @param user
-	 * @throws Exception
+	 * @param user usuario
+	 * @throws Exception error
 	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {

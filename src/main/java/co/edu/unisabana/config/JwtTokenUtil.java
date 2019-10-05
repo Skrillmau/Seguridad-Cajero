@@ -47,7 +47,7 @@ public class JwtTokenUtil implements Serializable {
 	}
 	/**
 	 * Retorna la fecha de creacion del token
-	 * @param token
+	 * @param token toekn
 	 * @return Date de creacion
 	 */
 	public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
@@ -56,15 +56,14 @@ public class JwtTokenUtil implements Serializable {
 	}
 	/**
 	 * Obtiene la key secreta usada para firmar el token
-	 * @param token
-	 * @return
+	 * @param token token
 	 */
 	private Claims getAllClaimsFromToken(String token) {
 		return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 	}
 	/**
 	 * Verifica si la fecha del token para comprobar si el token es valido
-	 * @param token
+	 * @param token token
 	 * @return Boolean dependiendo si el token es valido aun
 	 */
 	private Boolean isTokenExpired(String token) {
@@ -73,7 +72,7 @@ public class JwtTokenUtil implements Serializable {
 	}
 	/**
 	 * Genera el token 
-	 * @param token
+	 * @param userDetails token
 	 * @return String Token
 	 */
 	public String generateToken(UserDetails userDetails) {
@@ -89,7 +88,7 @@ public class JwtTokenUtil implements Serializable {
 	}
 	/**
 	 * Verifica si el token aun es valido con el usuario y la fecha de expiracion
-	 * @param token
+	 * @param token token
 	 * @return Boolean dependiendo si es valido el usuario y no ha expirado
 	 */
 	public Boolean validateToken(String token, UserDetails userDetails) {
