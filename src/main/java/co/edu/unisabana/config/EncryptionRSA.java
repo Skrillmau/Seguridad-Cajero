@@ -148,7 +148,7 @@ public class EncryptionRSA {
 		// Inicializar en modo encripcion con la clave
 		cipher.init(Cipher.DECRYPT_MODE, privateKey);
 
-		// Perform Decryption
+		// Decifrar usando RSA y la key
 		byte[] decryptedTextArray = cipher.doFinal(cipheredTxt);
 
 		return new String(decryptedTextArray);

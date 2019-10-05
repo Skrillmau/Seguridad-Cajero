@@ -12,12 +12,15 @@ public class EncryptionAES {
  
     private static SecretKeySpec secretKey;
     private static byte[] key;
-
-    public static void setKey(String myKey)
+/**
+ * Genera la key que se usara tanto para cifrado como decifrado
+ * @param pKey key para cifrar/decifrar
+ */
+    public static void setKey(String pKey)
     {
         MessageDigest sha = null;
         try {
-            key = myKey.getBytes("UTF-8");
+            key = pKey.getBytes("UTF-8");
             sha = MessageDigest.getInstance("SHA-1");
             key = sha.digest(key);
             key = Arrays.copyOf(key, 16);
@@ -30,15 +33,20 @@ public class EncryptionAES {
             e.printStackTrace();
         }
     }
- 
-    public static String encrypt(String strToEncrypt, String secret)
+ /**
+  * Cifrado usando AES modo cifrador de bloques ECB
+  * @param txt texto plano a cifrar
+  * @param key key para cifrado simetrico AES
+  * @return texto cifrado usando AES y la key
+  */
+    public static String encrypt(String txt, String key)
     {
         try
         {
-            setKey(secret);
+            setKey(key);
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
+            return Base64.getEncoder().encodeToString(cipher.doFinal(txt.getBytes("UTF-8")));
         }
         catch (Exception e)
         {
@@ -46,15 +54,20 @@ public class EncryptionAES {
         }
         return null;
     }
- 
-    public static String decrypt(String strToDecrypt, String secret)
+ /**
+  * Decifrado usando AES modo de cifrador de bloques ECB
+  * @param cipheredTxt texto cifrado a decifrar
+  * @param key key para decifrado simetrico
+  * @return texto decifrado usando AES y la key
+  */
+    public static String decrypt(String cipheredTxt, String key)
     {
         try
         {
-            setKey(secret);
+            setKey(key);
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
-            return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
+            return new String(cipher.doFinal(Base64.getDecoder().decode(cipheredTxt)));
         }
         catch (Exception e)
         {
