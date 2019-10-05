@@ -134,9 +134,9 @@ public class EncryptionRSA {
 	}
 /**
  * Descifrado usando RSA modo cifrador de bloques ECB
- * @param cipheredTxt
- * @param fileKey
- * @return
+ * @param cipheredTxt Texto a decifrar con RSA
+ * @param fileKey nombre del archivo que contiene la key formato keystore
+ * @return decryptedTextArray Texto decifrado usando RSA con modo ECB 
  * @throws Exception
  */
 	public static String decrypt(byte[] cipheredTxt, String fileKey) throws Exception {
