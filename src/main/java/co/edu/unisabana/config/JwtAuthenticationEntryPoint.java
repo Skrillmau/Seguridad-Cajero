@@ -14,7 +14,12 @@ import org.springframework.stereotype.Component;
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {
 
 	private static final long serialVersionUID = -7858869558953243875L;
-
+	/**
+	 * Obtiene todo el trafico a el servidor para verificar si el token es valido para acceder a el sistema
+	 * @param request
+	 * @param response
+	 * @param authException
+	 */
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException {

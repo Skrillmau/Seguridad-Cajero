@@ -24,50 +24,70 @@ public class JwtTokenUtil implements Serializable {
 	@Value("${jwt.secret}")
 	private String secret;
 
-	//retrieve username from jwt token
+	/**
+	 * Obtiene el username
+	 * @param token token valido para acceder a el servidor
+	 * @return UserName from token
+	 */
 	public String getUsernameFromToken(String token) {
 		return getClaimFromToken(token, Claims::getSubject);
 	}
+	/**
+	 * Retorna la fecha de expiracion del token
+	 * @param token
+	 * @return Date of expiration
+	 */
 
-	//retrieve expiration date from jwt token
 	public Date getExpirationDateFromToken(String token) {
 		return getClaimFromToken(token, Claims::getExpiration);
 	}
-
+	/**
+	 * Retorna la fecha de creacion del token
+	 * @param token
+	 * @return Date of expiration
+	 */
 	public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
 		final Claims claims = getAllClaimsFromToken(token);
 		return claimsResolver.apply(claims);
 	}
-    //for retrieveing any information from token we will need the secret key
+	/**
+	 * Obtiene la key secreta usada para firmar el token
+	 * @param token
+	 * @return
+	 */
 	private Claims getAllClaimsFromToken(String token) {
 		return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 	}
-
-	//check if the token has expired
+	/**
+	 * Verifica si la fecha del token para comprobar si el token es valido
+	 * @param token
+	 * @return Boolean dependiendo si el token es valido aun
+	 */
 	private Boolean isTokenExpired(String token) {
 		final Date expiration = getExpirationDateFromToken(token);
 		return expiration.before(new Date());
 	}
-
-	//generate token for user
+	/**
+	 * Genera el token 
+	 * @param token
+	 * @return String Token
+	 */
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
 		return doGenerateToken(claims, userDetails.getUsername());
 	}
 
-	//while creating the token -
-	//1. Define  claims of the token, like Issuer, Expiration, Subject, and the ID
-	//2. Sign the JWT using the HS512 algorithm and secret key.
-	//3. According to JWS Compact Serialization(https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41#section-3.1)
-	//   compaction of the JWT to a URL-safe string 
 	private String doGenerateToken(Map<String, Object> claims, String subject) {
 
 		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
 				.signWith(SignatureAlgorithm.HS512, secret).compact();
 	}
-
-	//validate token
+	/**
+	 * Verifica si el token aun es valido con el usuario y la fecha de expiracion
+	 * @param token
+	 * @return Boolean dependiendo si es valido el usuario y no ha expirado
+	 */
 	public Boolean validateToken(String token, UserDetails userDetails) {
 		final String username = getUsernameFromToken(token);
 		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));

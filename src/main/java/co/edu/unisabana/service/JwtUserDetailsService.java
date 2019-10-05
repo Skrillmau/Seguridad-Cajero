@@ -22,7 +22,6 @@ public class JwtUserDetailsService implements UserDetailsService {
 	private PasswordEncoder bcryptEncoder;
 
 	@Override
-
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		DAOUser user = userDao.findByUsername(username);
 		if (user == null) {
